@@ -1,0 +1,15 @@
+= AsciiDoc Little Project
+Juliana Carvalho <juliana.carvalhomartinez@gmail.com>
+:revdate: {localdate}
+:doctype: book
+:toc: left
+:toclevels: 2
+:sectnums:
+
+== Welcome
+
+This repository features:
+
+* AsciiDoc demo documentation
+* GitHub Actions and Docker Automation
+* GitHub Pages Deployment
