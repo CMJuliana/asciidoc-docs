@@ -1,0 +1,57 @@
+# This workflow will:
+# 1. Checkout the code
+# 2. Use Docker to build the HTML.
+# 3. Upload the generated HTML files as a GitHub Pages artifact.
+# 4. Use the 'pages-deploy' action to publish this artifact.
+
+name: Deploy AsciiDoc Documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master  # Run only on push to the main branch (main or master)
+  # Allows you to run the workflow manually from the GitHub interface
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    
+    # Define permissions required to upload artifacts and deploy to Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker BuildX
+        uses: docker/setup-buildx-action@v3
+        
+      # --- DOCKER BUILD ---
+      - name: Build and convert AsciiDoc to HTML
+        run: |
+          # Builds Docker image
+          docker build -t asciidoc-builder .
+          # Run the build, generating index.html in the 'docs' folder.
+          docker run --rm \
+            -v ${{ github.workspace }}/docs:/usr/src/app/docs \
+            asciidoc-builder \
+            -o /usr/src/app/docs/index.html \
+            /usr/src/app/docs/index.adoc
+            
+      # --- PREPARING FOR GITHUB PAGES ---
+      # The generated documentation will be in the 'docs' folder.
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs' # Upload the contents of the 'docs' folder containing index.html
+          
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
