@@ -1,0 +1,58 @@
+== AsciiDoc Publishing Workflow
+
+This project uses a GitHub Actions workflow (`build_and_deploy.yml`) to automaticaly build and publish AsciiDoc content.
+
+The following simplified breakdown describes the steps involved:
+
+=== 1. Checkout and Prepare Docker
+
+[source,yaml]
+----
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v4
+
+  - name: Set up Docker BuildX
+    uses: docker/setup-buildx-action@v3
+----
+
+=== 2. Build and convert AsciiDoc to HTML
+
+[source,yaml]
+----
+- name: Build and convert AsciiDoc to HTML
+  run: |
+    docker build -t asciidoc-builder .
+    docker run --rm \
+      -v ${{ github.workspace }}/docs:/usr/src/app/docs \
+      asciidoc-builder \
+      -o /usr/src/app/docs/index.html \
+      /usr/src/app/docs/index.adoc
+----
+
+=== 3. Upload generated HTML for GitHub Pages
+
+[source,yaml]
+----
+- name: Setup Pages
+  uses: actions/configure-pages@v5
+
+- name: Upload artifact
+  uses: actions/upload-pages-artifact@v3
+  with:
+    path: './docs'
+----
+
+=== 4. Deploy to GitHub Pages
+
+[source,yaml]
+----
+- name: Deploy to GitHub Pages
+  id: deployment
+  uses: actions/deploy-pages@v4
+----
+
+[NOTE]
+====
+The final site is automatically deployed to GitHub Pages on every push to the `main` branch.
+====

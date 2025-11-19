@@ -1,0 +1,7 @@
+== Welcome
+
+This repository demonstrates:
+
+* How to write documentation using AsciiDoc
+* Automated Publishing using Docker and GitHub Actions
+* Deployment to GitHub Pages 

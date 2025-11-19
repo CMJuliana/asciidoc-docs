@@ -3,13 +3,12 @@ Juliana Carvalho <juliana.carvalhomartinez@gmail.com>
 :revdate: {localdate}
 :doctype: book
 :toc: left
-:toclevels: 2
+:toclevels: 3
 :sectnums:
 
-== Welcome
 
-This repository features:
+include::0_Introduction/introduction.adoc[]
 
-* AsciiDoc demo documentation
-* GitHub Actions and Docker Automation
-* GitHub Pages Deployment
+<<<
+
+include::1_AsciiDoc/technical_guide.adoc[]
