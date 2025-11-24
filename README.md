@@ -13,4 +13,11 @@ It is designed as a portfolio piece to demonstrate:
 * Ability to structure and organize multi-file documentation  
 * Understanding of automated documentation pipelines  
 * Experience working with CI/CD workflows  
-* Knowledge of GitHub Actions and Pages deployment  
+* Knowledge of GitHub Actions and Pages deployment
+
+
+🚀 Live Deployment
+
+The documentation generated from this source is automatically published to the following URL after each commit to the *master* branch:
+
+https://cmjuliana.github.io/asciidoc-docs/
