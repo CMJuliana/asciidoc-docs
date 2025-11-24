@@ -11,4 +11,8 @@ include::0_Introduction/introduction.adoc[]
 
 <<<
 
-include::1_AsciiDoc/technical_guide.adoc[]
+include::1_AsciiDoc_Basics/asciidoc_basics.adoc[]
+
+<<<
+
+include::2_Publishing_Workflow/technical_guide.adoc[]

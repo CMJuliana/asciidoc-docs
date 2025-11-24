@@ -1,0 +1,205 @@
+== AsciiDoc Basics
+
+This section provides a quick introduction to **AsciiDoc syntax** and the elements most
+commonly used in technical documentation.  
+
+It serves as a practical reference for writing clean, structured documents that can be
+converted into HTML, PDF, or other formats.
+
+=== Headings
+
+AsciiDoc headings are created using one or more `=` characters at the start of a line:
+
+----
+= Document Title
+
+== Section Title
+
+=== Subsection
+
+==== Sub-subsection
+----
+
+=== Text Formatting
+
+You can apply basic formatting to emphasize text:
+
+----
+*Bold text*
+
+_Italic text_
+
+`Monospace (inline code)`
+
+*_Bold and italic_*
+----
+
+=== Lists
+
+Unordered Lists
+
+----
+* Item A
+* Item B
+** Nested item
+** Another nested item
+----
+
+Ordered Lists
+
+----
+. First step
+. Second step
+. Third step
+----
+
+=== Tables
+
+AsciiDoc supports several ways to create tables.  
+Here are the two most common formats: **pipe-style tables** and **tables with column specifications**.
+
+**Pipe-style table**
+
+This is the simplest and most commonly used table format.  
+Cells are defined using the `|` character, and the table is enclosed in `|===` markers.
+
+----
+|===
+| Product | ID        | Status
+
+| Widget A | A001     | Active
+| Widget B | B019     | Discontinued
+| Widget C | C442     | Pending Review
+|===
+----
+
+Use this format when you need a quick, readable table without special alignment or column control.
+
+**Tables with Column Specifications**
+
+For more control over layout (such as column width, alignment, or formatting),  
+you can specify column definitions using the `cols=""` attribute.
+
+Example:
+
+----
+[cols="2,1,2"]
+|===
+|Product Name |Code |Description
+
+|Widget A
+|A001
+|General-purpose component used in multiple assemblies.
+
+|Widget B
+|B019
+|Obsolete item scheduled for removal.
+
+|Widget C
+|C442
+|Awaiting quality assurance approval before release.
+|===
+----
+
+
+=== Links and Cross-References
+
+Create **cross-references** between pages or sections by defining **anchors** and then
+linking to them.
+
+To define an anchor in AsciiDoc, place an ID above a section:
+
+----
+[[installation]]
+== Installation Guide
+----
+
+Call (reference) the section using the following syntax:
+
+----
+See <<installation>> for more information.
+----
+
+You can also provide custom link text:
+
+----
+For details, see <<installation, the installation section>>.
+----
+
+To include external hyperlinks, place the URL followed by the link text in square brackets:
+
+----
+https://example.com[Example Website]
+----
+
+You can also use bare links without custom text:
+
+----
+https://example.com
+----
+
+=== Images
+
+Images are inserted using the `image::` macro. 
+
+You can specify attributes such as alt text, width, height, or roles inside the brackets.
+
+Example:
+
+----
+image::images/example.png[Example image, width=300]
+----
+
+=== Code Blocks
+
+Standard AsciiDoc source block:
+
+....
+[source,python]
+====
+def hello():
+
+    print("Hello AsciiDoc")
+====
+....
+
+(Four dashes define the block; the outer pair wraps the block metadata.)
+
+=== Admonitions
+
+Use admonitions to highlihgt important information and help users identify key points in your documentation:
+
+[Note]
+====
+
+This is a general note. Use it to provide context, additional information or clarifictions that support the main content.
+====
+
+[Important]
+====
+This is important information the reader should pay attention to before continuing. It often highlights prerequisites or essential instructions.
+====
+
+[Warning]
+====
+This is a warning. Use it to alert readers about potential issues, data loss, or unsafe actions.
+====
+
+Admonition syntax:
+
+----
+[Note]
+====
+Admonition content.
+====
+
+[Important]
+====
+Admonition content.
+====
+
+[Tip]
+====
+You can give your admonition any title you want.
+
+----
